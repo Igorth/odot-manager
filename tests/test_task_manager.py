@@ -17,3 +17,7 @@ manager.add_task(task3)
 
 # List all tasks
 print(manager.list_tasks())
+
+# Delete a task
+manager.delete_task('Clean the house')
+print(manager.list_tasks())

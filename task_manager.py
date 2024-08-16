@@ -16,3 +16,9 @@ class TaskManager:
     def list_tasks(self):
         return [task.to_dict() for task in self.tasks.values()]
 
+    def delete_task(self, title):
+        if title in self.tasks:
+            del self.tasks[title]
+            self.existing_titles.remove(title)
+        else:
+            raise KeyError(f"Task with title '{title}' not found.")
