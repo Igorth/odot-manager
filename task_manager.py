@@ -22,3 +22,8 @@ class TaskManager:
             self.existing_titles.remove(title)
         else:
             raise KeyError(f"Task with title '{title}' not found.")
+
+    def save_to_json(self, path='tasks.json'):
+        with open(path, 'w') as file:
+            json.dump(self.list_tasks(), file)
+

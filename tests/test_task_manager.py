@@ -15,6 +15,9 @@ manager.add_task(task1)
 manager.add_task(task2)
 manager.add_task(task3)
 
+# Save tasks to a JSON file
+manager.save_to_json()
+
 # List all tasks
 print(manager.list_tasks())
 
