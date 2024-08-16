@@ -14,13 +14,11 @@ class TaskManagerApp:
         # Interface layout
         self.title_label = tk.Label(root, text="Title:")
         self.title_label.grid(row=0, column=0)
-
         self.title_entry = tk.Entry(root)
         self.title_entry.grid(row=0, column=1)
 
         self.description_label = tk.Label(root, text="Description:")
         self.description_label.grid(row=1, column=0)
-
         self.description_entry = tk.Entry(root)
         self.description_entry.grid(row=1, column=1)
 
@@ -29,6 +27,13 @@ class TaskManagerApp:
 
         self.listbox = tk.Listbox(root)
         self.listbox.grid(row=3, column=0, columnspan=2)
+        self.listbox.bind("<Double-Button-1>")
+
+        self.edit_button = tk.Button(root, text="Edit Task", command=self.edit_task)
+        self.edit_button.grid(row=4, column=0)
+
+        self.delete_button = tk.Button(root, text="Delete Task")
+        self.delete_button.grid(row=4, column=1)
 
         self.update_list()
 
@@ -52,6 +57,21 @@ class TaskManagerApp:
         for task_dict in self.manager.list_tasks():
             status = "Completed" if task_dict["completed"] else "Incomplete"
             self.listbox.insert(tk.END, f"{task_dict['title']} - {status}: {task_dict['description']}")
+
+    def edit_task(self):
+        selected_task = self.listbox.get(tk.ACTIVE)
+        if selected_task:
+            title = selected_task.split(" - ")[0]
+            new_title = self.title_entry.get()
+            new_description = self.description_entry.get()
+
+            if title in self.manager.tasks:
+                task = self.manager.tasks[title]
+                task.edit(new_title, new_description)
+                self.manager.save_to_json()
+                self.update_list()
+            else:
+                messagebox.showerror("Error", "Task not found.")
 
 
 if __name__ == "__main__":
