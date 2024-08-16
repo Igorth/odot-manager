@@ -14,3 +14,6 @@ task3 = Task('Prepare dinner', 'Cook meat, vegetables, and drink')
 manager.add_task(task1)
 manager.add_task(task2)
 manager.add_task(task3)
+
+# List all tasks
+print(manager.list_tasks())
