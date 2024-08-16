@@ -24,11 +24,25 @@ class TaskManagerApp:
         self.description_entry = tk.Entry(root)
         self.description_entry.grid(row=1, column=1)
 
-        self.add_button = tk.Button(root, text="Add Task")
+        self.add_button = tk.Button(root, text="Add Task", command=self.add_task)
         self.add_button.grid(row=2, column=1)
 
         self.listbox = tk.Listbox(root)
         self.listbox.grid(row=3, column=0, columnspan=2)
+
+    def add_task(self):
+        title = self.title_entry.get()
+        description = self.description_entry.get()
+
+        if title:
+            try:
+                new_task = Task(title, description)
+                self.manager.add_task(new_task)
+                self.manager.save_to_json()
+            except ValueError as e:
+                messagebox.showerror("Error", str(e))
+        else:
+            messagebox.showerror("Error", "Please enter a title.")
 
 
 if __name__ == "__main__":
