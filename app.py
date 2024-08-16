@@ -7,33 +7,38 @@ from task import Task
 class TaskManagerApp:
     def __init__(self, root):
         self.manager = TaskManager()
-        # self.manager.load_from_json()
+        self.manager.load_from_json()
         self.root = root
         self.root.title("Odot Manager")
 
+        # Screen setup
+        self.root.geometry("600x450")
+        self.root.grid_columnconfigure(1, weight=1)
+        self.root.grid_rowconfigure(1, weight=1)
+
         # Interface layout
         self.title_label = tk.Label(root, text="Title:")
-        self.title_label.grid(row=0, column=0)
-        self.title_entry = tk.Entry(root)
-        self.title_entry.grid(row=0, column=1)
+        self.title_label.grid(row=0, column=0, padx=10, pady=10, sticky="w")
+        self.title_entry = tk.Entry(root, width=50)
+        self.title_entry.grid(row=0, column=1, padx=10, pady=10, sticky="ew")
 
         self.description_label = tk.Label(root, text="Description:")
-        self.description_label.grid(row=1, column=0)
-        self.description_entry = tk.Entry(root)
-        self.description_entry.grid(row=1, column=1)
+        self.description_label.grid(row=1, column=0, padx=10, pady=10, sticky="w")
+        self.description_entry = tk.Entry(root, width=50)
+        self.description_entry.grid(row=1, column=1, padx=10, pady=10, sticky="ew")
 
         self.add_button = tk.Button(root, text="Add Task", command=self.add_task)
-        self.add_button.grid(row=2, column=1)
+        self.add_button.grid(row=2, column=1, padx=10, pady=10, sticky="e")
 
-        self.listbox = tk.Listbox(root)
-        self.listbox.grid(row=3, column=0, columnspan=2)
+        self.listbox = tk.Listbox(root, width=80, height=15)
+        self.listbox.grid(row=3, column=0, columnspan=2, padx=10, pady=10, sticky="nsew")
         self.listbox.bind("<Double-Button-1>", self.mark_as_completed)
 
         self.edit_button = tk.Button(root, text="Edit Task", command=self.edit_task)
-        self.edit_button.grid(row=4, column=0)
+        self.edit_button.grid(row=4, column=0, padx=10, pady=10, sticky="w")
 
         self.delete_button = tk.Button(root, text="Delete Task", command=self.delete_task)
-        self.delete_button.grid(row=4, column=1)
+        self.delete_button.grid(row=4, column=1, padx=10, pady=10, sticky="e")
 
         self.update_list()
 

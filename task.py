@@ -1,5 +1,7 @@
 class Task:
-    def __init__(self, title, description):
+    def __init__(self, title, description=""):
+        if not title.strip():
+            raise ValueError("Task title cannot be empty")
         self.title = title
         self.description = description
         self.completed = False
