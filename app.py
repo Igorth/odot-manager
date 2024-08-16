@@ -32,7 +32,7 @@ class TaskManagerApp:
         self.edit_button = tk.Button(root, text="Edit Task", command=self.edit_task)
         self.edit_button.grid(row=4, column=0)
 
-        self.delete_button = tk.Button(root, text="Delete Task")
+        self.delete_button = tk.Button(root, text="Delete Task", command=self.delete_task)
         self.delete_button.grid(row=4, column=1)
 
         self.update_list()
@@ -72,6 +72,17 @@ class TaskManagerApp:
                 self.update_list()
             else:
                 messagebox.showerror("Error", "Task not found.")
+
+    def delete_task(self):
+        selected_task = self.listbox.get(tk.ACTIVE)
+        if selected_task:
+            title = selected_task.split(" - ")[0]
+            try:
+                self.manager.delete_task(title)
+                self.manager.save_to_json()
+                self.update_list()
+            except KeyError as e:
+                messagebox.showerror("Error", str(e))
 
 
 if __name__ == "__main__":
