@@ -1,5 +1,7 @@
 # Odot Manager
 
+![Odot Manager Demo](odot-manager.gif)
+
 A simple task management application built with Python and Tkinter. This application allows users to add, edit, delete, and mark tasks as completed. Tasks are stored in a JSON file to maintain persistence across sessions.
 
 ## Features
