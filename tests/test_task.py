@@ -1,10 +1,19 @@
+import unittest
 from task import Task
 
 
-# Create a task and print it
-task = Task("Buy groceries", "Milk, eggs, bread")
-print(task.to_dict())
+class TestTask(unittest.TestCase):
 
-# Mark the task as complete
-task.mark_as_completed()
-print(task.to_dict())
+    def test_create_task(self):
+        task = Task("Finish report", "Write up the results of the project")
+        self.assertEqual(task.title, "Finish report")
+        self.assertEqual(task.completed, False)
+
+    def test_mark_as_completed(self):
+        task = Task("Finish report", "Write up the results of the project")
+        task.mark_as_completed()
+        self.assertEqual(task.completed, True)
+
+
+if __name__ == '__main__':
+    unittest.main()

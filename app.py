@@ -30,6 +30,8 @@ class TaskManagerApp:
         self.listbox = tk.Listbox(root)
         self.listbox.grid(row=3, column=0, columnspan=2)
 
+        self.update_list()
+
     def add_task(self):
         title = self.title_entry.get()
         description = self.description_entry.get()
@@ -39,10 +41,17 @@ class TaskManagerApp:
                 new_task = Task(title, description)
                 self.manager.add_task(new_task)
                 self.manager.save_to_json()
+                self.update_list()
             except ValueError as e:
                 messagebox.showerror("Error", str(e))
         else:
             messagebox.showerror("Error", "Please enter a title.")
+
+    def update_list(self):
+        self.listbox.delete(0, tk.END)
+        for task_dict in self.manager.list_tasks():
+            status = "Completed" if task_dict["completed"] else "Incomplete"
+            self.listbox.insert(tk.END, f"{task_dict['title']} - {status}: {task_dict['description']}")
 
 
 if __name__ == "__main__":
