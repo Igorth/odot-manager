@@ -27,7 +27,7 @@ class TaskManagerApp:
 
         self.listbox = tk.Listbox(root)
         self.listbox.grid(row=3, column=0, columnspan=2)
-        self.listbox.bind("<Double-Button-1>")
+        self.listbox.bind("<Double-Button-1>", self.mark_as_completed)
 
         self.edit_button = tk.Button(root, text="Edit Task", command=self.edit_task)
         self.edit_button.grid(row=4, column=0)
@@ -83,6 +83,16 @@ class TaskManagerApp:
                 self.update_list()
             except KeyError as e:
                 messagebox.showerror("Error", str(e))
+
+    def mark_as_completed(self, event):
+        selected_task = self.listbox.get(tk.ACTIVE)
+        if selected_task:
+            title = selected_task.split(" - ")[0]
+            if title in self.manager.tasks:
+                task = self.manager.tasks[title]
+                task.mark_as_completed()
+                self.manager.save_to_json()
+                self.update_list()
 
 
 if __name__ == "__main__":
