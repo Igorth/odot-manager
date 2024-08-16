@@ -27,3 +27,12 @@ class TaskManager:
         with open(path, 'w') as file:
             json.dump(self.list_tasks(), file)
 
+    def load_from_json(self, path='tasks.json'):
+        try:
+            with open(path, 'r') as file:
+                tasks = json.load(file)
+                for task_data in tasks:
+                    task = Task.from_dict(task_data)
+                    self.add_task(task)
+        except FileNotFoundError:
+            print(f"File '{path}' not found. Creating an empty task list.")

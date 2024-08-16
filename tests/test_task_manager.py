@@ -4,6 +4,7 @@ from task import Task
 
 # Create a task manager instance and load tasks from a JSON file
 manager = TaskManager()
+manager.load_from_json()
 
 
 # Add tasks to the task manager
@@ -19,7 +20,8 @@ manager.add_task(task3)
 manager.save_to_json()
 
 # List all tasks
-print(manager.list_tasks())
+tasks = manager.list_tasks()
+print(tasks)
 
 # Delete a task
 manager.delete_task('Clean the house')
