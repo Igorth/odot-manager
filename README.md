@@ -1,4 +1,8 @@
 # Odot Manager
+![Python](https://img.shields.io/badge/Python-3.x-blue.svg)
+![Tkinter](https://img.shields.io/badge/GUI-Tkinter-green.svg)
+![JSON](https://img.shields.io/badge/Data-JSON-lightgrey.svg)
+![unittest](https://img.shields.io/badge/Testing-unittest-red.svg)
 
 ![Odot Manager Demo](odot-manager.gif)
 
